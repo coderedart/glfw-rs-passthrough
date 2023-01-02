@@ -1,3 +1,7 @@
+## WARNING
+README might be wrong because i left it as is for now. I eventually plan to abandon this library and revert back to original piston's `glfw-rs`, once glfw releases stable version `3.4` with the mouse passthrough patch.
+
+
 <!--
     Copyright 2013-2014 The GLFW-RS Developers. For a full listing of the authors,
     refer to the AUTHORS file at the top-level directory of this distribution.
@@ -26,7 +30,7 @@ GLFW bindings and wrapper for The Rust Programming Language.
 ## Example
 
 ~~~rust
-extern crate glfw;
+use glfw_passthrough as glfw;
 
 use glfw::{Action, Context, Key};
 
@@ -75,36 +79,24 @@ binaries when you call `make` or `make lib`:
 GLFW_LIB_DIR=path/to/glfw/lib/directory make
 ~~~
 
-### Including glfw-rs in your project
+### Including glfw-rs-passthorugh in your project
 
 Add this to your `Cargo.toml`:
 
 ~~~toml
-[dependencies.glfw]
+[dependencies.glfw-passthrough]
 version = "*"
 ~~~
 
 #### On Windows
 
-By default, `glfw-rs` will try to compile the `glfw` library. If you want to link to your custom
+By default, `glfw-rs-passthrough` will try to compile the `glfw` library. If you want to link to your custom
 build of `glfw` or if the build doesn't work (which is probably the case on Windows), you can
 disable this:
 
 ~~~toml
-[dependencies.glfw]
-version = "*"
+[dependencies.glfw-passthrough]
+git = "https://github.com/coderedart/glfw-rs-passthrough.git"
 default-features = false
 ~~~
 
-## Support
-
-Contact `bjz` on irc.mozilla.org [#rust](http://mibbit.com/?server=irc.mozilla.org&channel=%23rust)
-and [#rust-gamedev](http://mibbit.com/?server=irc.mozilla.org&channel=%23rust-gamedev),
-or [post an issue](https://github.com/bjz/glfw-rs/issues/new) on GitHub.
-
-## glfw-rs in use
-
-- [sebcrozet/kiss3d](https://github.com/sebcrozet/kiss3d)
-- [Jeaye/q3](https://github.com/Jeaye/q3)
-- [cyndis/rsmc](https://github.com/cyndis/rsmc/)
-- [ozkriff/zoc](https://github.com/ozkriff/zoc)

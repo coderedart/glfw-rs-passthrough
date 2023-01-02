@@ -16,7 +16,7 @@
 //! Demonstrates how concurrent rendering can be achieved
 //! through the use of `RenderContext`s.
 
-extern crate glfw;
+use glfw_passthrough as glfw;
 
 use glfw::{Action, Context, Key};
 use std::sync::mpsc::{channel, Receiver};

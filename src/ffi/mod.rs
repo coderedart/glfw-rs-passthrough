@@ -262,6 +262,7 @@ pub const CENTER_CURSOR: c_int = 0x00020009;
 pub const TRANSPARENT_FRAMEBUFFER: c_int = 0x0002000A;
 pub const HOVERED: c_int = 0x0002000B;
 pub const FOCUS_ON_SHOW: c_int = 0x0002000C;
+pub const MOUSE_PASSTHROUGH: c_int = 0x0002000D;
 
 pub const RED_BITS: c_int = 0x00021001;
 pub const GREEN_BITS: c_int = 0x00021002;

@@ -15,7 +15,7 @@
 
 //! Demonstrates how custom error callbacks with user data can be created
 
-extern crate glfw;
+use glfw_passthrough as glfw;
 #[macro_use]
 extern crate log;
 

@@ -13,17 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#[cfg(feature = "glfw-sys")]
+#[cfg(feature = "glfw-sys-passthrough")]
 #[link(name = "glfw3", kind = "static")]
 extern "C" {}
 
-#[cfg(not(feature = "glfw-sys"))]
+#[cfg(not(feature = "glfw-sys-passthrough"))]
 // leaving off `kind = static` allows for the specification of a dynamic library if desired
 #[cfg(target_family = "unix")]
 #[link(name = "glfw")]
 extern "C" {}
 
-#[cfg(not(feature = "glfw-sys"))]
+#[cfg(not(feature = "glfw-sys-passthrough"))]
 #[cfg(target_family = "windows")]
 #[link(name = "glfw3")]
 extern "C" {}

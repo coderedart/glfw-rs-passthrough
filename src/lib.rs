@@ -16,7 +16,7 @@
 #![crate_type = "lib"]
 #![crate_type = "rlib"]
 #![crate_type = "dylib"]
-#![crate_name = "glfw"]
+#![crate_name = "glfw_passthrough"]
 #![deny(
     rust_2018_compatibility,
     rust_2018_idioms,
@@ -35,7 +35,7 @@
 //! # Example
 //!
 //! ~~~no_run
-//! extern crate glfw;
+//! use glfw_passthrough as glfw;
 //!
 //! use glfw::{Action, Context, Key};
 //!
@@ -742,7 +742,7 @@ pub fn init_hint(hint: InitHint) {
 /// # Example
 ///
 /// ~~~no_run
-/// extern crate glfw;
+/// use glfw_passthrough as glfw;
 ///
 /// fn main() {
 ///    let glfw = glfw::init(glfw::FAIL_ON_ERRORS).unwrap();
@@ -1042,6 +1042,9 @@ impl Glfw {
             },
             WindowHint::ScaleToMonitor(scale) => unsafe {
                 ffi::glfwWindowHint(ffi::SCALE_TO_MONITOR, scale as c_int)
+            },
+            WindowHint::MousePassthrough(pass) => unsafe {
+                ffi::glfwWindowHint(ffi::MOUSE_PASSTHROUGH, pass as c_int)
             },
             WindowHint::CocoaRetinaFramebuffer(retina_fb) => unsafe {
                 ffi::glfwWindowHint(ffi::COCOA_RETINA_FRAMEBUFFER, retina_fb as c_int)
@@ -1781,6 +1784,10 @@ pub enum WindowHint {
     ///
     /// This includes the initial placement when the window is created.
     ScaleToMonitor(bool),
+    /// Specifies whether the window is transparent to mouse input, letting any mouse events pass
+    /// through to whatever window is behind it. This is only supported for undecorated windows.
+    /// Decorated windows with this enabled will behave differently between platforms.
+    MousePassthrough(bool),
     /// Specifies whether to use full resolution framebuffers on Retina displays.
     ///
     /// This is ignored on platforms besides macOS.
@@ -2349,6 +2356,18 @@ impl Window {
     /// Wrapper for `glfwSetWindowAttrib` called with `FLOATING`.
     pub fn set_floating(&mut self, floating: bool) {
         unsafe { ffi::glfwSetWindowAttrib(self.ptr, ffi::FLOATING, floating as c_int) }
+    }
+
+    /// Wrapper for `glfwGetWindowAttrib` called with `MOUSE_PASSTHROUGH`.
+    pub fn is_mouse_passthrough(&self) -> bool {
+        unsafe { ffi::glfwGetWindowAttrib(self.ptr, ffi::MOUSE_PASSTHROUGH) == ffi::TRUE }
+    }
+
+    /// Wrapper for `glfwSetWindowAttrib` called with `MOUSE_PASSTHROUGH`.
+    pub fn set_mouse_passthrough(&mut self, mouse_passthrough: bool) {
+        unsafe {
+            ffi::glfwSetWindowAttrib(self.ptr, ffi::MOUSE_PASSTHROUGH, mouse_passthrough as c_int)
+        }
     }
 
     /// Wrapper for `glfwGetWindowAttrib` called with `TRANSPARENT_FRAMEBUFFER`.

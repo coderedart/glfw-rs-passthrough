@@ -15,7 +15,7 @@
 
 // NOTE: Make sure to resize the OpenGL viewport (or whatever else) after any size changes.
 
-extern crate glfw;
+use glfw_passthrough as glfw;
 
 use glfw::{Action, Context, Key};
 

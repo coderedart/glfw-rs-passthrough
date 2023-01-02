@@ -12,26 +12,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 use glfw_passthrough as glfw;
-
 use glfw::{Action, Context, Key};
 
 fn main() {
     let mut glfw = glfw::init(glfw::FAIL_ON_ERRORS).unwrap();
-
+    glfw.window_hint(glfw::WindowHint::MousePassthrough(true));
     let (mut window, events) = glfw
         .create_window(
-            400,
-            400,
-            "English 日本語 русский язык 官話",
+            300,
+            300,
+            "Hello this is window",
             glfw::WindowMode::Windowed,
         )
         .expect("Failed to create GLFW window.");
 
     window.set_key_polling(true);
     window.make_current();
-    glfw.set_swap_interval(glfw::SwapInterval::Sync(1));
 
     while !window.should_close() {
         glfw.poll_events();
@@ -41,9 +38,14 @@ fn main() {
     }
 }
 
-fn handle_window_event(window: &mut glfw::Window, event: glfw::WindowEvent) {
+fn handle_window_event(
+    window: &mut glfw::Window,
+    event: glfw::WindowEvent,
+) {
     match event {
-        glfw::WindowEvent::Key(Key::Escape, _, Action::Press, _) => window.set_should_close(true),
+        glfw::WindowEvent::Key(Key::Escape, _, Action::Press, _) => {
+            window.set_should_close(true)
+        }
         _ => {}
     }
 }
