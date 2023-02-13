@@ -6,7 +6,7 @@ license = "Apache-2.0"
 name = "glfw-passthrough"
 readme = "README.md"
 repository = "https://github.com/coderedart/glfw-rs.git"
-version = "0.50.0"
+version = "0.51.0"
 edition = "2021"
 rust-version = "1.56"
 
