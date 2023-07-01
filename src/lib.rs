@@ -1019,6 +1019,9 @@ impl Glfw {
             WindowHint::Focused(is_focused) => unsafe {
                 ffi::glfwWindowHint(ffi::FOCUSED, is_focused as c_int)
             },
+            WindowHint::Maximized(is_maximized) => unsafe {
+                ffi::glfwWindowHint(ffi::MAXIMIZED, is_maximized as c_int)
+            },
             WindowHint::ContextNoError(is_no_error) => unsafe {
                 ffi::glfwWindowHint(ffi::CONTEXT_NO_ERROR, is_no_error as c_int)
             },
@@ -1230,7 +1233,7 @@ impl Glfw {
     /// If no windows exist, this function returns immediately.
     ///
     /// Wrapper for `glfwPostEmptyEvent`.
-    pub fn post_empty_event(&mut self) {
+    pub fn post_empty_event() {
         unsafe {
             ffi::glfwPostEmptyEvent();
         }
@@ -1480,6 +1483,25 @@ impl std::fmt::Debug for Monitor {
 }
 
 impl Monitor {
+
+    /// Wrapper for `glfwGetPrimaryMonitor`.
+    pub fn from_primary() -> Self {
+        unsafe {
+            Self {
+                ptr: ffi::glfwGetPrimaryMonitor()
+            }
+        }
+    }
+
+    /// Wrapper for `glfwGetWindowMonitor`.
+    pub fn from_window(window: &Window) -> Self {
+        unsafe {
+            Self {
+                ptr: ffi::glfwGetWindowMonitor(window.ptr)
+            }
+        }
+    }
+
     /// Wrapper for `glfwGetMonitorPos`.
     pub fn get_pos(&self) -> (i32, i32) {
         unsafe {
@@ -1751,6 +1773,10 @@ pub enum WindowHint {
     ///
     /// This hint is ignored for full screen and initially hidden windows.
     Focused(bool),
+    /// Specifies whether the windowed mode window will be maximized when created.
+    ///
+    /// This hint is ignored for full screen windows.
+    Maximized(bool),
     /// Specifies whether the OpenGL or OpenGL ES contexts do not emit errors,
     /// allowing for better performance in some situations.
     ContextNoError(bool),
