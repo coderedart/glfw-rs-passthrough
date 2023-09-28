@@ -6,7 +6,7 @@ license = "Apache-2.0"
 name = "glfw"
 readme = "README.md"
 repository = "https://github.com/bjz/glfw-rs"
-version = "0.52.0"
+version = "0.53.0"
 edition = "2021"
 rust-version = "1.56"
 
@@ -40,7 +40,8 @@ version = "0.37.2"
 log = "0.4"
 
 [features]
-all = ["image", "vulkan", "log", "wayland"]
+all = ["image", "vulkan", "log", "wayland", "glfw-callbacks"]
 default = ["glfw-sys"]
 vulkan = ["ash"]
 wayland = ["glfw-sys/wayland"]
+glfw-callbacks = []
