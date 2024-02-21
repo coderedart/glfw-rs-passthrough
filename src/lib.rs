@@ -1029,7 +1029,8 @@ pub fn init_hint(hint: InitHint) {
 /// using the `glfw::init` function.
 ///
 /// ~~~no_run
-/// extern crate glfw;
+/// extern crate glfw_passthrough;
+/// use glfw_passthrough as glfw;
 /// #[macro_use]
 /// extern crate log;
 ///
