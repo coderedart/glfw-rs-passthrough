@@ -1,5 +1,4 @@
-## WARNING
-README might be wrong because i left it as is for now. I eventually plan to abandon this library and revert back to original piston's `glfw-rs`, once glfw releases stable version `3.4` with the mouse passthrough patch.
+## WARNING: Upstream `glfw-rs` crate has the passthroug patches, so, this crate is now retired.
 
 
 <!--
